@@ -29,7 +29,23 @@ app.get("/books",(c)=>{
   }
   return c.json(books);
 })
+
 // /books POST
+app.post("/books", async (c)=> {
+  const body = await c.req.json();
+  const name = body.name;
+
+  const newBook = {
+    id: books.length + 1,
+    name: name,
+    status: "在庫あり",
+  };
+
+  books.push(newBook);
+
+  return c.json(newBook);
+})
+
 // /books/:id PUT
 // /books/:id DELETE
 
