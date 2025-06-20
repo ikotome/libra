@@ -47,6 +47,20 @@ app.post("/books", async (c)=> {
 })
 
 // /books/:id PUT
+app.put("/books/:id", async (c)=> {
+  const id = c.req.param("id");
+  const body = await c.req.json();
+  const status = body.status;
+
+  const book = books.find((book) => book.id === Number(id));
+
+  if (!book){
+    return c.json({error: "書籍が見つかりません"});
+  }
+  book.status = status;
+
+  return c.json(book);
+})
 // /books/:id DELETE
 
 
